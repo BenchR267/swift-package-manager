@@ -13,7 +13,7 @@ import TSCUtility
 import Build
 import PackageModel
 
-public class ToolOptions {
+public class ToolOptions: Option {
     /// Custom arguments to pass to C compiler, swift compiler and the linker.
     public var buildFlags = BuildFlags()
 

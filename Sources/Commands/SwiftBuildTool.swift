@@ -26,7 +26,8 @@ public class SwiftBuildTool: SwiftTool<BuildToolOptions> {
         )
     }
 
-    override func runImpl() throws {
+    public override func runImpl() throws {
+        try super.runImpl()
         switch try options.mode() {
         case .build:
           #if os(Linux)
@@ -46,7 +47,8 @@ public class SwiftBuildTool: SwiftTool<BuildToolOptions> {
         }
     }
 
-    override class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<BuildToolOptions>) {
+    public override class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<BuildToolOptions>) {
+        super.defineArguments(parser: parser, binder: binder)
         binder.bind(
             option: parser.add(option: buildTestsOptionName, kind: Bool.self,
                 usage: "Build both source and test targets"),
@@ -164,7 +166,7 @@ fileprivate extension BuildSubset {
 }
 
 extension SwiftBuildTool: ToolName {
-    static var toolName: String {
+    public static var toolName: String {
         return "swift build"
     }
 }

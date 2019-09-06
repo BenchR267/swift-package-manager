@@ -155,7 +155,8 @@ public class SwiftTestTool: SwiftTool<TestToolOptions> {
         )
     }
 
-    override func runImpl() throws {
+    public override func runImpl() throws {
+        try super.runImpl()
 
         // Validate commands arguments
         try validateArguments()
@@ -384,8 +385,8 @@ public class SwiftTestTool: SwiftTool<TestToolOptions> {
         return testProduct
     }
 
-    override class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<TestToolOptions>) {
-
+    override public class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<TestToolOptions>) {
+        super.defineArguments(parser: parser, binder: binder)
         binder.bind(
             option: parser.add(option: "--skip-build", kind: Bool.self,
                 usage: "Skip building the test target"),
@@ -941,7 +942,7 @@ fileprivate extension Sequence where Iterator.Element == TestSuite {
 }
 
 extension SwiftTestTool: ToolName {
-    static var toolName: String {
+    public static var toolName: String {
         return "swift test"
     }
 }

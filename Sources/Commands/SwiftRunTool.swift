@@ -88,7 +88,8 @@ public class SwiftRunTool: SwiftTool<RunToolOptions> {
         )
     }
 
-    override func runImpl() throws {
+    public override func runImpl() throws {
+        try super.runImpl()
         switch options.mode {
         case .version:
             print(Versioning.currentVersion.completeDisplayString)
@@ -195,7 +196,8 @@ public class SwiftRunTool: SwiftTool<RunToolOptions> {
         return localFileSystem.isFile(absolutePath)
     }
 
-    override class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<RunToolOptions>) {
+    override public class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<RunToolOptions>) {
+        super.defineArguments(parser: parser, binder: binder)
         binder.bind(
             option: parser.add(option: skipBuildOptionName, kind: Bool.self,
                 usage: "Skip building the executable product"),
@@ -226,7 +228,7 @@ fileprivate let buildTestsOptionName = "--build-tests"
 fileprivate let skipBuildOptionName = "--skip-build"
 
 extension SwiftRunTool: ToolName {
-    static var toolName: String {
+    public static var toolName: String {
         return "swift run"
     }
 }

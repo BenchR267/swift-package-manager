@@ -32,7 +32,8 @@ public class SwiftPackageTool: SwiftTool<PackageToolOptions> {
         )
     }
 
-    override func runImpl() throws {
+    public override func runImpl() throws {
+        try super.runImpl()
         switch options.mode {
         case .version:
             print(Versioning.currentVersion.completeDisplayString)
@@ -334,7 +335,8 @@ public class SwiftPackageTool: SwiftTool<PackageToolOptions> {
         }
     }
 
-    override class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<PackageToolOptions>) {
+    override public class func defineArguments(parser: ArgumentParser, binder: ArgumentBinder<PackageToolOptions>) {
+        super.defineArguments(parser: parser, binder: binder)
         let describeParser = parser.add(
             subparser: PackageMode.describe.rawValue,
             overview: "Describe the current package")
@@ -713,7 +715,7 @@ extension PackageToolOptions.ConfigMode: StringEnumArgument {
 }
 
 extension SwiftPackageTool: ToolName {
-    static var toolName: String {
+    public static var toolName: String {
         return "swift package"
     }
 }
